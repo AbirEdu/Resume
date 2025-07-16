@@ -6,53 +6,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abir Bose - Resume</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <style>
+    /* --- Base Page --- */
     body {
       font-family: 'Arial', sans-serif;
       line-height: 1.6;
       color: #333;
+      background-color: #f8f9fa;
       padding-bottom: 100px;
     }
 
-    /* Constrain resume width for predictable PDF rendering */
+    /* --- Resume Card Wrapper --- */
     #resumeContent {
       max-width: 800px;
       margin: 0 auto;
+   
+    }
+    .resume-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
+    /* --- Header --- */
+    .header {
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid #200880;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap; /* responsive */
+      gap: 20px;
+      text-align: center;
+    }
+    .header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .header-text-wrap {
+      flex: 1 1 auto;
+      min-width: 250px;
+    }
     .name {
       font-size: 2rem;
       font-weight: bold;
+      color: #200880;
       letter-spacing: 1px;
     }
-
     .title {
       font-size: 1.2rem;
-      color: #555;
+      color: #444;
     }
-
-    .section-title {
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      margin-top: 30px;
-      border-left: 5px solid #200880;
-      background-color: #f0f0f0;
-      padding: 6px 10px;
+    .contact-info {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .contact-info a {
       color: #200880;
-      page-break-after: avoid;
-      break-after: avoid-page;
+      text-decoration: none;
+      margin-right: 10px;
+      word-break: break-all;
     }
-
-    .skill,
-    .award-name {
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .linkedin-link {
+      color: #0a66c2;
       font-weight: bold;
     }
+    .linkedin-link:hover {
+      color: #004182;
+      text-decoration: underline;
+    }
 
+    /* Action buttons under header */
+    .header-actions {
+      margin-top: 12px;
+    }
     .contact-btn,
     #downloadBtn {
       background-color: #2c3e50;
-      color: white;
-      padding: 10px 20px;
+      color: #fff;
+      padding: 8px 18px;
       border: none;
       border-radius: 5px;
       font-weight: bold;
@@ -60,38 +100,81 @@
       text-decoration: none;
       cursor: pointer;
       display: inline-block;
+      font-size: 0.95rem;
     }
-
     .contact-btn:hover,
     #downloadBtn:hover {
       background-color: #1a252f;
-    }
-
-    footer {
-      background-color: #f8f9fa;
-      padding: 20px;
-      text-align: center;
-      border-top: 1px solid #ddd;
-    }
-
-    .text-muted.float-end {
-      color: #8408b5 !important;
-    }
-
-    .fw-bold {
-      color: #8408b5 !important;
-    }
-
-    a {
-      color: inherit;
+      color: #fff;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    /* --- Company Logos Row --- */
+    .company-logos {
+      gap: 20px;
+    }
+    .company-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+    .logo-item .years {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 5px;
     }
 
-    /* Page-break control */
+    /* --- Section Titles --- */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #200880;
+      border-left: 5px solid #200880;
+      padding-left: 10px;
+      page-break-after: avoid;
+      break-after: avoid-page;
+    }
+
+    /* --- Experience Blocks --- */
+    .fw-bold {
+      color: #8408b5 !important;
+    }
+    .text-muted.float-end {
+      color: #8408b5 !important;
+    }
+    .exp-item {
+      margin-bottom: 1rem;
+      page-break-inside: avoid;
+      break-inside: avoid-page;
+    }
+    .exp-item ul {
+      margin-bottom: 0.5rem;
+    }
+
+    /* --- Skills Badges --- */
+    .badge-skill {
+      background-color: #200880 !important;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .award-name {
+      font-weight: bold;
+    }
+
+    /* --- Footer (inside PDF) --- */
+    .resume-footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* --- Page-break protections --- */
     .section,
     .exp-item,
     .exp-item ul,
@@ -100,342 +183,296 @@
       break-inside: avoid-page;
     }
 
-    .exp-item {
-      margin-bottom: 1rem;
-    }
-
-    /* Print/PDF-specific */
+    /* --- Print Overrides --- */
     @media print {
       body {
         padding-bottom: 0;
-      }
-      #resumeContent {
-        padding-bottom: 0;
+        background: #fff;
       }
       #downloadBtn,
       .contact-btn {
         display: none !important;
       }
+      .resume-container {
+        box-shadow: none;
+        border-radius: 0;
+      }
     }
-
-    .linkedin-link {
-  color: #0a66c2;
-  text-decoration: none;
-  font-weight: bold;
-  }
-
-.linkedin-link:hover {
-  text-decoration: underline;
-  color: #004182;
-}
-
-.company-logos {
-  gap: 20px; /* Space between logos */
-}
-
-.company-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-.logo-item .years {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 5px;
-}
   </style>
 </head>
 
 <body>
-  <!-- WRAPPED CONTENT FOR PDF -->
-  <div id="resumeContent" class="container py-4">
-    <div class="text-center mb-4">
-      <div class="name">ABIR BOSE</div>
-      <div class="title">Assistant Vice President</div>
-      <div class="text-muted">
-        Bangalore |
-        <a href="tel:+919686706007">+91 9686706007</a> |
-        <a href="mailto:abir.bose25@gmail.com">abir.bose25@gmail.com</a>,
-        <a href="mailto:bose.abir@gmail.com">bose.abir@gmail.com</a> |
-        <a href="https://www.linkedin.com/in/abir-bose-7487966b" target="_blank" rel="noopener" class="linkedin-link">LinkedIn</a>
+  <div class="container py-4">
+    <div id="resumeContent" class="resume-container">
+      
+      <!-- ===== Header ===== -->
+      <div class="header">
+       
+        <!-- Header Text -->
+        <div class="header-text-wrap">
+          <div class="name">ABIR BOSE</div>
+          <div class="title">Assistant Vice President</div>
+          <div class="contact-info">
+            Bangalore |
+            <a href="tel:+919686706007">+91 9686706007</a> |
+            <a href="mailto:abir.bose25@gmail.com">abir.bose25@gmail.com</a>,
+            <a href="mailto:bose.abir@gmail.com">bose.abir@gmail.com</a> |
+            <a href="https://www.linkedin.com/in/abir-bose-7487966b" target="_blank" rel="noopener" class="linkedin-link">LinkedIn</a>
+          </div>
+          <div class="header-actions">
+            <button id="downloadBtn" class="me-2">Download Resume</button>
+            <a href="mailto:abir.bose25@gmail.com" class="contact-btn">Contact Me</a>
+          </div>
+        </div>
       </div>
-      <div class="mt-3">
-        <button id="downloadBtn" class="me-2">Download Resume</button>
-        <a href="mailto:abir.bose25@gmail.com" class="contact-btn">Contact Me</a>
-      </div>
-    </div>
+
+      <!-- ===== Company Logos ===== -->
       <div class="company-logos d-flex justify-content-center align-items-center my-3">
-        <!-- Company 1 -->
         <div class="logo-item text-center mx-3">
           <img src="./Images/G_BIG.png" alt="Genpact" class="company-logo">
           <div class="years">2019 - Now</div>
         </div>
-        <!-- Company 2 -->
         <div class="logo-item text-center mx-3">
           <img src="./Images/GE.png" alt="GE" class="company-logo">
           <div class="years">2016 - 2019</div>
         </div>
-        <!-- Company 3 -->
         <div class="logo-item text-center mx-3">
           <img src="./Images/TCS.NS_BIG.png" alt="TCS" class="company-logo">
           <div class="years">2004 - 2015</div>
         </div>
       </div>
-    <div class="section">
-      <div class="section-title">Professional Summary</div>
-      <p>Experienced IT leader with over 21 years in the IT industry, specializing in Oracle EBS, Program Management,
-        DevOps, Full-Stack Development, and IT Operations. Adept at managing global teams, driving digital
-        transformation, and delivering enterprise-scale solutions across Finance, Procurement, and Supply Chain domains.
-        Proven ability to lead complex programs and build high-performing teams.</p>
-    </div>
 
-    <div class="section">
-      <div class="section-title">Core Competencies</div>
-      <div class="row">
-        <div class="col-md-6">
+      <!-- ===== Professional Summary ===== -->
+      <div class="section">
+        <div class="section-title">Professional Summary</div>
+        <p>Experienced IT leader with over 21 years in the IT industry, specializing in Oracle EBS, Program Management,
+          DevOps, Full-Stack Development, and IT Operations. Adept at managing global teams, driving digital
+          transformation, and delivering enterprise-scale solutions across Finance, Procurement, and Supply Chain domains.
+          Proven ability to lead complex programs and build high-performing teams.</p>
+      </div>
+
+      <!-- ===== Core Competencies ===== -->
+      <div class="section">
+        <div class="section-title">Core Competencies</div>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li>Oracle EBS (P2P, O2C, IT Finance)</li>
+              <li>Program &amp; Project Management</li>
+              <li>DevOps &amp; Agile Methodologies</li>
+              <li>Full-Stack Web Development</li>
+              <li>Governance &amp; SLA Management</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li>Data &amp; Analytics</li>
+              <li>Vendor &amp; Stakeholder Management</li>
+              <li>IT Transformation &amp; Process Optimization</li>
+              <li>People Leadership &amp; Talent Development</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Work Experience ===== -->
+      <div class="section">
+        <div class="section-title">Work Experience</div>
+
+        <div class="exp-item">
+          <div class="fw-bold">Engagement Leader, Eastern Applications – Genpact India
+            <span class="text-muted float-end">2021–Now</span>
+          </div>
           <ul>
-            <li>Oracle EBS (P2P, O2C, IT Finance)</li>
-            <li>Program &amp; Project Management</li>
-            <li>DevOps &amp; Agile Methodologies</li>
-            <li>Full-Stack Web Development</li>
-            <li>Governance &amp; SLA Management</li>
+            <li>Lead end-to-end <strong>program delivery and operations</strong> for a portfolio of <strong>32 enterprise applications</strong>.</li>
+            <li>Accountable for <strong>program governance</strong>, <strong>SLA adherence</strong>, <strong>quality management</strong>, and <strong>customer satisfaction</strong>.</li>
+            <li>Manage <strong>customer communication, escalations</strong>, and ensure timely delivery of all program milestones.</li>
+            <li>Collaborate with cross-functional teams to ensure alignment of IT services with business goals.</li>
+            <li>Contributed to <strong>hands-on design and development</strong> of key modules across multiple applications.</li>
+            <li>Played a key role in ensuring compliance, consistency, and delivery excellence across multiple programs.</li>
           </ul>
         </div>
-        <div class="col-md-6">
+
+        <div class="exp-item">
+          <div class="fw-bold">Product Owner – OC &amp; S2P Applications – Genpact India
+            <span class="text-muted float-end">2019–2021</span>
+          </div>
           <ul>
-            <li>Data &amp; Analytics</li>
-            <li>Vendor &amp; Stakeholder Management</li>
-            <li>IT Transformation &amp; Process Optimization</li>
-            <li>People Leadership &amp; Talent Development</li>
+            <li>Define and execute the <strong>product strategy</strong> for OC and S2P applications, including roadmap planning and feature prioritization.</li>
+            <li>Oversee delivery of <strong>enhancements, bug fixes</strong>, and performance optimizations.</li>
+            <li>Lead the <strong>spin-off strategy</strong> for application components, ensuring alignment with long-term product vision.</li>
+            <li>Collaborate with engineering, business, and operational teams to deliver high-value functionality.</li>
           </ul>
         </div>
-      </div>
-    </div>
 
-    <div class="section">
-      <div class="section-title">Work Experience</div>
-
-      <div class="exp-item">
-        <div class="fw-bold">Engagement Leader, Eastern Applications – Genpact India
-          <span class="text-muted float-end">2021–Now</span>
+        <div class="exp-item">
+          <div class="fw-bold">Data &amp; Analytics Leader - Genpact India
+            <span class="text-muted float-end">2019–2022</span>
+          </div>
+          <ul>
+            <li>Lead prioritization and delivery of enhancements and new development in the <strong>B2P metric reporting</strong> space.</li>
+            <li>Manage operations and development for <strong>dashboards built on the finance data lake</strong>.</li>
+            <li>Evangelize product adoption among business and operations teams, promoting <strong>data-driven decisions</strong>.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Lead end-to-end <strong>program delivery and operations</strong> for a portfolio of <strong>32 enterprise
-              applications</strong>.</li>
-          <li>Accountable for <strong>program governance</strong>, <strong>SLA adherence</strong>, <strong>quality
-              management</strong>, and <strong>customer satisfaction</strong>.</li>
-          <li>Manage <strong>customer communication, escalations</strong>, and ensure timely delivery of all program
-            milestones.</li>
-          <li>Collaborate with cross-functional teams to ensure alignment of IT services with business goals.</li>
-          <li>Contributed to <strong>hands-on design and development</strong> of key modules across multiple
-            applications.</li>
-          <li>Played a key role in ensuring compliance, consistency, and delivery excellence across multiple programs.
-          </li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Product Owner – OC &amp; S2P Applications – Genpact India
-          <span class="text-muted float-end">2019–2021</span>
+        <div class="exp-item">
+          <div class="fw-bold">Program Manager &amp; Solution Architect – Shared Sourcing Services Dev Team - GE India
+            <span class="text-muted float-end">2016–2019</span>
+          </div>
+          <ul>
+            <li>Led a team of <strong>8 GE resources</strong> and <strong>40 vendor consultants</strong> delivering Oracle P2P solutions.</li>
+            <li>Supported the <strong>SSS application</strong> managing <strong>$25B in invoices</strong> and <strong>$35B in purchase orders</strong> annually.</li>
+            <li>Focused on <strong>team mentoring, coaching, and performance management</strong> to maintain a high-performing culture.</li>
+            <li>Transformed delivery approach from <strong>waterfall to Scrum framework</strong>, enabling faster and more flexible execution.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Define and execute the <strong>product strategy</strong> for OC and S2P applications, including roadmap
-            planning and feature prioritization.</li>
-          <li>Oversee delivery of <strong>enhancements, bug fixes</strong>, and performance optimizations.</li>
-          <li>Lead the <strong>spin-off strategy</strong> for application components, ensuring alignment with long-term
-            product vision.</li>
-          <li>Collaborate with engineering, business, and operational teams to deliver high-value functionality.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Data &amp; Analytics Leader - Genpact India
-          <span class="text-muted float-end">2019–2022</span>
+        <div class="exp-item">
+          <div class="fw-bold">Senior Program Manager – APEX - GE India
+            <span class="text-muted float-end">2018–2019</span>
+          </div>
+          <ul>
+            <li>Led the <strong>Accounts Payable Excellence Model</strong> for GE Digital across multiple business units.</li>
+            <li>Standardized AP processes and implemented functionality in the <strong>Strategic ERP</strong>.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Lead prioritization and delivery of enhancements and new development in the <strong>B2P metric
-              reporting</strong> space.</li>
-          <li>Manage operations and development for <strong>dashboards built on the finance data lake</strong>.</li>
-          <li>Evangelize product adoption among business and operations teams, promoting <strong>data-driven
-              decisions</strong>.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Program Manager &amp; Solution Architect – Shared Sourcing Services Dev Team - GE India
-          <span class="text-muted float-end">2016–2019</span>
+        <div class="exp-item">
+          <div class="fw-bold">Delivery Manager &amp; Solution Architect – US Motor Divestiture - GE India
+            <span class="text-muted float-end">2018–2018</span>
+          </div>
+          <ul>
+            <li>Led the divestiture of the <strong>US Motor business</strong> with focus on planning, cost, resource, and risk management.</li>
+            <li>Delivered Oracle Finance and Order Management solutions aligned with business needs.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Led a team of <strong>8 GE resources</strong> and <strong>40 vendor consultants</strong> delivering Oracle
-            P2P solutions.</li>
-          <li>Supported the <strong>SSS application</strong> managing <strong>$25B in invoices</strong> and <strong>$35B
-              in purchase orders</strong> annually.</li>
-          <li>Focused on <strong>team mentoring, coaching, and performance management</strong> to maintain a
-            high-performing culture.</li>
-          <li>Transformed delivery approach from <strong>waterfall to Scrum framework</strong>, enabling faster and more
-            flexible execution.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Senior Program Manager – APEX - GE India
-          <span class="text-muted float-end">2018–2019</span>
+        <div class="exp-item">
+          <div class="fw-bold">Transformation Lead – Project Dyson, GE-India
+            <span class="text-muted float-end">2017–2017</span>
+          </div>
+          <ul>
+            <li>Directed IT transformation for Shared Sourcing Services, achieving <strong>30% cost reduction</strong>.</li>
+            <li>Handled <strong>contract/SOW creation, vendor transition, and team onboarding</strong> for Project Dyson.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Led the <strong>Accounts Payable Excellence Model</strong> for GE Digital across multiple business units.
-          </li>
-          <li>Standardized AP processes and implemented functionality in the <strong>Strategic ERP</strong>.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Delivery Manager &amp; Solution Architect – US Motor Divestiture - GE India
-          <span class="text-muted float-end">2018–2018</span>
+        <div class="exp-item">
+          <div class="fw-bold">Transformation Lead – Insource Digital Team, GE, India
+            <span class="text-muted float-end">2016–2016</span>
+          </div>
+          <ul>
+            <li>Drove transition from vendor to <strong>insourced model</strong> for GE Digital’s IT development team.</li>
+            <li>Recruited and mentored <strong>17 GE FTEs</strong> aligned with GE’s 50–50 insourcing strategy.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Led the divestiture of the <strong>US Motor business</strong> with focus on planning, cost, resource, and
-            risk management.</li>
-          <li>Delivered Oracle Finance and Order Management solutions aligned with business needs.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Transformation Lead – Project Dyson, GE-India
-          <span class="text-muted float-end">2017–2017</span>
+        <div class="exp-item">
+          <div class="fw-bold">Senior Program Manager – Source to Pay Development, TCS, US
+            <span class="text-muted float-end">2013–2015</span>
+          </div>
+          <ul>
+            <li>Led a <strong>40-member development team</strong> to deliver scalable Oracle S2P solutions with real-time and batch interfaces.</li>
+            <li>Designed and delivered customizations aligned with complex <strong>business requirements</strong>.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Directed IT transformation for Shared Sourcing Services, achieving <strong>30% cost reduction</strong>.
-          </li>
-          <li>Handled <strong>contract/SOW creation, vendor transition, and team onboarding</strong> for Project Dyson.
-          </li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Transformation Lead – Insource Digital Team, GE, India
-          <span class="text-muted float-end">2016–2016</span>
+        <div class="exp-item">
+          <div class="fw-bold">DevOps Leader – Shared Sourcing Services, TCS, USA
+            <span class="text-muted float-end">2012–2014</span>
+          </div>
+          <ul>
+            <li>Implemented a <strong>DevOps model</strong> that reduced operational cost by <strong>35%</strong>.</li>
+            <li>Established <strong>SOD and governance frameworks</strong> to ensure <strong>SOX compliance</strong>.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Drove transition from vendor to <strong>insourced model</strong> for GE Digital’s IT development team.
-          </li>
-          <li>Recruited and mentored <strong>17 GE FTEs</strong> aligned with GE’s 50–50 insourcing strategy.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Senior Program Manager – Source to Pay Development, TCS, US
-          <span class="text-muted float-end">2013–2015</span>
+        <div class="exp-item">
+          <div class="fw-bold">Transformation Leader – R12 Migration, TCS, USA
+            <span class="text-muted float-end">2011–2012</span>
+          </div>
+          <ul>
+            <li>Led the migration of Oracle P2P from <strong>11.5.10.2 to R12.1.3</strong>, including <strong>10TB of production data</strong>.</li>
+            <li>Handled <strong>250+ OUs</strong>, <strong>1400 interfaces</strong>, and <strong>450+ custom components</strong>.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Led a <strong>40-member development team</strong> to deliver scalable Oracle S2P solutions with real-time
-            and batch interfaces.</li>
-          <li>Designed and delivered customizations aligned with complex <strong>business requirements</strong>.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">DevOps Leader – Shared Sourcing Services, TCS, USA
-          <span class="text-muted float-end">2012–2014</span>
+        <div class="exp-item">
+          <div class="fw-bold">Operations Lead – Production (Oracle P2P Platform)
+            <span class="text-muted float-end">2008–2011</span>
+          </div>
+          <ul>
+            <li>Led production operations for Oracle P2P platform across <strong>250+ OUs, 1400 interfaces, and 450 custom components</strong>.</li>
+            <li>Managed a team of <strong>45 associates</strong>, handling <strong>1500+ service requests</strong> and <strong>50+ incidents</strong> monthly within SLA.</li>
+            <li>Standardized processes and improved operational efficiency through simplification initiatives.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Implemented a <strong>DevOps model</strong> that reduced operational cost by <strong>35%</strong>.</li>
-          <li>Established <strong>SOD and governance frameworks</strong> to ensure <strong>SOX compliance</strong>.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Transformation Leader – R12 Migration, TCS, USA
-          <span class="text-muted float-end">2011–2012</span>
+        <div class="exp-item">
+          <div class="fw-bold">Implementation &amp; Operations Lead – Oracle P2P/O2C, TCS, India/USA
+            <span class="text-muted float-end">2004–2008</span>
+          </div>
+          <ul>
+            <li>Implemented Oracle EBS for <strong>Order to Cash and Procure to Pay</strong> cycles across multiple GE business units.</li>
+            <li>Led a <strong>20-member team</strong> across India and the US for rollout and post-implementation support.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Led the migration of Oracle P2P from <strong>11.5.10.2 to R12.1.3</strong>, including <strong>10TB of
-              production data</strong>.</li>
-          <li>Handled <strong>250+ OUs</strong>, <strong>1400 interfaces</strong>, and <strong>450+ custom
-              components</strong>.</li>
-        </ul>
-      </div>
+      </div><!-- /Work Experience -->
 
-      <div class="exp-item">
-        <div class="fw-bold">Operations Lead – Production (Oracle P2P Platform)
-          <span class="text-muted float-end">2008–2011</span>
+      <!-- ===== Skills ===== -->
+      <div class="section">
+        <div class="section-title">Skills</div>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge badge-skill">Data and Analytics</span>
+          <span class="badge badge-skill">Full Stack Development</span>
+          <span class="badge badge-skill">DevOps and Agile Methodologies</span>
+          <span class="badge badge-skill">Oracle EBS - IT Finance</span>
+          <span class="badge badge-skill">Project and Program Management</span>
+          <span class="badge badge-skill">People Leadership and Talent Development</span>
+          <span class="badge badge-skill">Vendor and Stakeholder Management</span>
+          <span class="badge badge-skill">IT Transformation and Process Optimization</span>
+          <span class="badge badge-skill">Product Ownership</span>
         </div>
-        <ul>
-          <li>Led production operations for Oracle P2P platform across <strong>250+ OUs, 1400 interfaces, and 450 custom
-              components</strong>.</li>
-          <li>Managed a team of <strong>45 associates</strong>, handling <strong>1500+ service requests</strong> and
-            <strong>50+ incidents</strong> monthly within SLA.</li>
-          <li>Standardized processes and improved operational efficiency through simplification initiatives.</li>
-        </ul>
       </div>
 
-      <div class="exp-item">
-        <div class="fw-bold">Implementation &amp; Operations Lead – Oracle P2P/O2C, TCS, India/USA
-          <span class="text-muted float-end">2004–2008</span>
-        </div>
-        <ul>
-          <li>Implemented Oracle EBS for <strong>Order to Cash and Procure to Pay</strong> cycles across multiple GE
-            business units.</li>
-          <li>Led a <strong>20-member team</strong> across India and the US for rollout and post-implementation support.
-          </li>
-        </ul>
+      <!-- ===== Certification & Honors ===== -->
+      <div class="section">
+        <div class="section-title">Certification and Honors</div>
+        <p><span class="award-name">Oracle Certified Associate &amp; Professional</span>. 2007</p>
+        <p><span class="award-name">Six Sigma Black Belt</span>. 2013</p>
+        <p><span class="award-name">Green Belt</span>. 2013</p>
+        <p><span class="award-name">Certified Scrum Master</span>. 2018</p>
+        <p><span class="award-name">Leadership Graduate – Crotonville University, GE</span>. 2018</p>
       </div>
-    </div><!-- /Work Experience -->
 
-    <div class="section">
-      <div class="section-title">Skills</div>
-      <div class="d-flex flex-wrap gap-2">
-        <span class="badge bg-secondary">Data and Analytics</span>
-        <span class="badge bg-secondary">Full Stack Development</span>
-        <span class="badge bg-secondary">DevOps and Agile Methodologies</span>
-        <span class="badge bg-secondary">Oracle EBS - IT Finance</span>
-        <span class="badge bg-secondary">Project and Program Management</span>
-        <span class="badge bg-secondary">People Leadership and Talent Development</span>
-        <span class="badge bg-secondary">Vendor and Stakeholder Management</span>
-        <span class="badge bg-secondary">IT Transformation and Process Optimization</span>
-        <span class="badge bg-secondary">Product Ownership</span>
+      <!-- ===== Education ===== -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div><strong>M.Tech – Data Science &amp; Machine Learning</strong> <span class="text-muted">Oct 2023 – Oct 2025 (Pursuing)</span><br>PES University, Bangalore</div>
+        <div class="mt-2"><strong>B.E. – Computer Science Engineering</strong> <span class="text-muted">2000 - 2004</span><br>Visvesvaraya Technological University, Karnataka</div>
+        <div class="mt-2"><strong>Indian School Certificate (ISC)</strong><br>Bishop Westcott Boys’ School, Ranchi</div>
+        <div class="mt-2"><strong>Indian Certificate of Secondary Education</strong><br>Don Bosco School, Dumka</div>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="section-title">Certification and Honors</div>
-      <p><span class="award-name">Oracle Certified Associate &amp; Professional</span>. 2007</p>
-      <p><span class="award-name">Six Sigma Black Belt</span>. 2013</p>
-      <p><span class="award-name">Green Belt</span>. 2013</p>
-      <p><span class="award-name">Certified Scrum Master</span>. 2018</p>
-      <p><span class="award-name">Leadership Graduate – Crotonville University, GE</span>. 2018</p>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Education</div>
-      <div><strong>M.Tech – Data Science &amp; Machine Learning</strong> <span class="text-muted">Oct 2023 – Oct 2025 (Pursuing)</span><br>PES University, Bangalore</div>
-      <div><strong>B.E. – Computer Science Engineering</strong> <span class="text-muted">2000 - 2004</span><br>Visvesvaraya Technological University, Karnataka</div>
-      <div><strong>Indian School Certificate (ISC)</strong><br>Bishop Westcott Boys’ School, Ranchi</div>
-      <div><strong>Indian Certificate of Secondary Education</strong><br>Don Bosco School, Dumka</div>
-    </div>
-
-    <!-- Footer inside wrapper so it prints -->
-    <footer class="mt-5">
-      <div>
+      <!-- ===== Footer (prints in PDF) ===== -->
+      <div class="resume-footer mt-5">
         Bangalore |
         <a href="tel:+919686706007">+91 9686706007</a> |
         <a href="mailto:abir.bose25@gmail.com">abir.bose25@gmail.com</a>,
         <a href="mailto:bose.abir@gmail.com">bose.abir@gmail.com</a>
       </div>
-    </footer>
-  </div><!-- /#resumeContent -->
+    </div><!-- /resume-container -->
+  </div><!-- /container -->
 
   <!-- html2pdf script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     document.getElementById("downloadBtn").addEventListener("click", () => {
-      // Clone only the resume content, not the whole body
       const source = document.getElementById("resumeContent");
       const element = source.cloneNode(true);
 
-      // Remove interactive elements in the clone
+      // Remove interactive elements for PDF
       element.querySelector("#downloadBtn")?.remove();
       element.querySelectorAll(".contact-btn").forEach(btn => btn.remove());
 
@@ -459,5 +496,4 @@
     });
   </script>
 </body>
-
 </html>
