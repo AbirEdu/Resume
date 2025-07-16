@@ -128,6 +128,24 @@
   text-decoration: underline;
   color: #004182;
 }
+
+.company-logos {
+  gap: 20px; /* Space between logos */
+}
+
+.company-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.logo-item .years {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+}
   </style>
 </head>
 
@@ -149,7 +167,23 @@
         <a href="mailto:abir.bose25@gmail.com" class="contact-btn">Contact Me</a>
       </div>
     </div>
-
+      <div class="company-logos d-flex justify-content-center align-items-center my-3">
+        <!-- Company 1 -->
+        <div class="logo-item text-center mx-3">
+          <img src="./Images/G_BIG.png" alt="Genpact" class="company-logo">
+          <div class="years">2021 - Now</div>
+        </div>
+        <!-- Company 2 -->
+        <div class="logo-item text-center mx-3">
+          <img src="./Images/GE.png" alt="GE" class="company-logo">
+          <div class="years">2016 - 2019</div>
+        </div>
+        <!-- Company 3 -->
+        <div class="logo-item text-center mx-3">
+          <img src="./Images/TCS.NS_BIG.png" alt="TCS" class="company-logo">
+          <div class="years">2004 - 2015</div>
+        </div>
+      </div>
     <div class="section">
       <div class="section-title">Professional Summary</div>
       <p>Experienced IT leader with over 21 years in the IT industry, specializing in Oracle EBS, Program Management,
